@@ -11,5 +11,9 @@
     "url": "Top Song Tweets"
   },
   "author": "Marc Molta",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.81.0",
+    "twit": "^2.2.9"
+  }
 }
