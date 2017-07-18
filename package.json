@@ -1,0 +1,15 @@
+{
+  "name": "top_song_tweets",
+  "version": "1.0.0",
+  "description": "each day it picks a random country and tweets its current #1 song, according to Spotify",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "Top Song Tweets"
+  },
+  "author": "Marc Molta",
+  "license": "ISC"
+}
