@@ -8,10 +8,6 @@ let bot = new twit({
 	access_token_secret: Rs7LFhreS7kF17I5cI66m2qP7rkvbPpFpyNvJDquhrdEI
 })
 
-function getSong(callback){
-	
-}
-
 function tweet(chars){
 	console.log(chars)
 	bot.post('statuses/update', {status: tweet}, function(err, data, response) {
