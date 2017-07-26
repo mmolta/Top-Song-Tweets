@@ -13,8 +13,9 @@
   "author": "Marc Molta",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.15.3",
+    "chai": "^4.1.0",
     "request": "^2.81.0",
+    "supertest": "^3.0.0",
     "twit": "^2.2.9"
   }
 }
