@@ -1,6 +1,6 @@
 /*const twit = require('twit')
 const twitterRequest = require('request')*/
-
+const spotifyAccess = 'https://accounts.spotify.com/api/token'
 const spotifyArtists = 'https://api.spotify.com/v1/artists/'
 const spotifySearch = 'https://api.spotify.com/v1/search?q='
 
@@ -12,8 +12,11 @@ const tracksButton = document.getElementById('trackz-btn')
 const searchButton = document.getElementById('search-btn')
 
 // get the access code
-let accessCode = () => {
-	
+let getAccessCode = () => {
+	let url = spotifyAccess
+	request.open('POST', url)
+	request.setRequestHeader('Authorization', 'Basic ' + 'd0c1abf7269e458aaff4c2bc811b0453:5b3a7c070e664df7ac886fb7218c9eb7')
+	request.send('grant_type', 'client_credentials')
 }
 
 // get the inputted artist name and country
@@ -58,6 +61,7 @@ let getArtistTopTracks = (artistID, country) => {
 
 // wrap the onlick in a function to make it an event handler, otherwise it will
 // put the evaluatied value of getARtistTopTracks on the onclick 
+console.log('access code, maybe?', getAccessCode())
 searchButton.onclick = () => {
 	getArtistID('The Rolling Stones')
 }
