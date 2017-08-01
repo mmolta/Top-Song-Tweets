@@ -1,6 +1,12 @@
 /*const twit = require('twit')
 const twitterRequest = require('request')*/
-const spotifyAccess = 'https://accounts.spotify.com/api/token'
+
+// variables for access token requests
+const spotifyAccess = 'https://accounts.spotify.com/authorize?'
+const client_id = 'client_id=d0c1abf7269e458aaff4c2bc811b0453'
+const redirect_uri = '&redirect_uri=file:%2F%2F%2Fhome%2Fmarc%2Fprojects%2Ftwitter-bot%2Fclient%2Fview%2Findex.html'
+const response_type = '&response_type=token'
+
 const spotifyArtists = 'https://api.spotify.com/v1/artists/'
 const spotifySearch = 'https://api.spotify.com/v1/search?q='
 
@@ -11,22 +17,24 @@ const request = new XMLHttpRequest()
 const tracksButton = document.getElementById('trackz-btn')
 const searchButton = document.getElementById('search-btn')
 
-// get the access code
+// get the access code via Spotify's Implicit Grant Flow
 let getAccessCode = () => {
-	let url = spotifyAccess
-	request.open('POST', url)
-	request.setRequestHeader('Authorization', 'Basic ' + 'd0c1abf7269e458aaff4c2bc811b0453:5b3a7c070e664df7ac886fb7218c9eb7')
-	request.send('grant_type', 'client_credentials')
+	let url = spotifyAccess + client_id + redirect_uri + response_type
+	console.log('access code query string', url)
+	request.open('GET', url)
+	request.setRequestHeader('Access-Control-Allow-Origin', '*')
+	request.send(null)
 }
 
-// get the inputted artist name and country
+/* get the inputted artist name and country
+const artistName = document.getElementById('artist-name')
+const countryName = document.getElementById('country-name')
+*/
 
 // get the artist ID from Spotify 
 // artist name must be parsed so spaces in between are converted to + signs
 let getArtistID = (artistName) =>{
-	console.log('artist name as inputted', artistName)
 	let nameReformatted = artistName.split(' ').join('+')
-	console.log('artist name after reformating', nameReformatted)
 	let url = spotifySearch + nameReformatted + '&type=artist'
 	request.open('GET', url)
 	request.setRequestHeader('Authorization', 'Bearer' + '5b3a7c070e664df7ac886fb7218c9eb7')
@@ -53,7 +61,6 @@ let getArtistTopTracks = (artistID, country) => {
 			console.log('request successful ', request)
 		}else {
 			console.log('request failed with a status of: ', request.status)
-			console.log(url)
 		}
 	}
 	request.send(null)
