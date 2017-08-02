@@ -26,6 +26,21 @@ let getAccessCode = () => {
 	request.send(null)
 }
 
+// get the access code from the hash of the URL (hashParams function from Spotify tutorial)
+function getHashParams() {
+	let hashParams = {};
+	let e, r = /([^&;=]+)=?([^&;]*)/g,
+		q = window.location.hash.substring(1);
+	while ( e = r.exec(q)) {
+		hashParams[e[1]] = decodeURIComponent(e[2]);
+	}
+	return hashParams;
+}
+
+let access_token = getHashParams().access_token
+
+console.log('access token? ', access_token)
+
 /* get the inputted artist name and country
 const artistName = document.getElementById('artist-name')
 const countryName = document.getElementById('country-name')
@@ -68,7 +83,8 @@ let getArtistTopTracks = (artistID, country) => {
 
 // wrap the onlick in a function to make it an event handler, otherwise it will
 // put the evaluatied value of getARtistTopTracks on the onclick 
-console.log('access code, maybe?', getAccessCode())
+getAccessCode()
+
 searchButton.onclick = () => {
 	getArtistID('The Rolling Stones')
 }
