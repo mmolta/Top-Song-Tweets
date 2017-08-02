@@ -1,3 +1,5 @@
+'use strict'
+
 /*const twit = require('twit')
 const twitterRequest = require('request')*/
 
@@ -6,7 +8,7 @@ const spotifyAccess = 'https://accounts.spotify.com/authorize?'
 const client_id = 'client_id=d0c1abf7269e458aaff4c2bc811b0453'
 const redirect_uri = '&redirect_uri=https:%2F%2Fgithub.com%2Fmmolta%2FTop-Song-Tweets'
 const response_type = '&response_type=token'
-
+		
 const spotifyArtists = 'https://api.spotify.com/v1/artists/'
 const spotifySearch = 'https://api.spotify.com/v1/search?q='
 
