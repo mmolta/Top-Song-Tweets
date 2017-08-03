@@ -1,12 +1,9 @@
 'use strict'
 
-/*const twit = require('twit')
-const twitterRequest = require('request')*/
-
 // variables for access token requests
 const spotifyAccess = 'https://accounts.spotify.com/authorize?'
-const client_id = 'client_id=d0c1abf7269e458aaff4c2bc811b0453'
-const redirect_uri = '&redirect_uri=https:%2F%2Fgithub.com%2Fmmolta%2FTop-Song-Tweets'
+const client_id = 'client_id=' + process.env.SPOTIFY_CLIENT_ID
+const redirect_uri = '&redirect_uri=http://localhost:8888'
 const response_type = '&response_type=token'
 		
 const spotifyArtists = 'https://api.spotify.com/v1/artists/'
@@ -54,7 +51,7 @@ let getArtistID = (artistName) =>{
 	let nameReformatted = artistName.split(' ').join('+')
 	let url = spotifySearch + nameReformatted + '&type=artist'
 	request.open('GET', url)
-	request.setRequestHeader('Authorization', 'Bearer' + '5b3a7c070e664df7ac886fb7218c9eb7')
+	request.setRequestHeader('Authorization', 'Bearer' + process.env.SPOTIFY_CLIENT_SECRET)
 	request.onload = () => {
 		if (request.status === 200) {
 			console.log('request successful ', request)
@@ -72,7 +69,7 @@ let getArtistTopTracks = (artistID, country) => {
 	// path for an artists top tracks
 	let url = spotifyArtists + artistID + '/top-tracks' + `?country=${country}`
 	request.open('GET', url)
-	request.setRequestHeader('Authorization', 'Bearer' + '5b3a7c070e664df7ac886fb7218c9eb7')
+	request.setRequestHeader('Authorization', 'Bearer' + process.env.SPOTIFY_CLIENT_SECRET)
 	request.onload = () => {
 		if (request.status === 200) {
 			console.log('request successful ', request)
@@ -93,18 +90,3 @@ searchButton.onclick = () => {
 tracksButton.onclick = () => {
 	getArtistTopTracks('4tZwfgrHOc3mvqYlEYSvVi', 'FR')
 }
-
-/*
-let bot = new twit({
-	consumer_key: YmfMdmMVJotxKyJl85DBSRLZm,
-	consumer_secret: LFSWBoVT8n8QiCtOCt96cIrhO2FLdTYsPDJQqUg4H10y3qcYPA,
-	access_token: 	1694764148-LnNfJyMcHPIOTGh2OMhBd3z5jGx9tHpOJbuT1MO,
-	access_token_secret: Rs7LFhreS7kF17I5cI66m2qP7rkvbPpFpyNvJDquhrdEI
-})
-
-function tweet(chars){
-	console.log(chars)
-	bot.post('statuses/update', {status: tweet}, function(err, data, response) {
-		console.log(data)
-	})
-}*/
