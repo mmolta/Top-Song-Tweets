@@ -1,10 +1,12 @@
 'use strict'
 
 const express = require('express')
+const path = require('path')
 const app = express();
 const port = 8888;
 
-app.use(express.static((resolve(__dirname + '/client/view')));
+// static file serving w/express
+app.use(express.static(path.join(__dirname, '..', 'client')));
 
 app.listen(port, function(err) {
 	if(err) throw err;
