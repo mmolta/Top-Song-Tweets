@@ -17,7 +17,7 @@ let bot = new twit({
 })
 
 // for testing only to make sure the tweet is working
-// this URL will eventually be replaced with the spotify API call!!
+// this URL will eventually be replaced with the spotify API call!
 const url = 'https://api.forismatic.com/api/1.0/?method=getQuote&key=123456&format=text&lang=en'
 
 // function that performs the API call (will update to be Spotify data)
