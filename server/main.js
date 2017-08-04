@@ -1,7 +1,13 @@
+'use strict'
+
 // env process
 require('dotenv').config()
+
 const twit = require('twit')
-const request = require('request') 
+const request = require('request')
+const spotify_calls = require('./spotify_api_calls')
+
+console.log('spotify api calls functions as it stands: ', spotify_calls)
 
 let bot = new twit({
 	consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -19,7 +25,6 @@ function getSong(callback){
 	request(url, function(err, res, body) {
 		console.log('error: ', err)
 		console.log('response with statusCode: ', res.statusCode)
-		console.log('body: ', body)
 		callback(body)
 	})
 }
@@ -32,4 +37,5 @@ function tweet(chars){
 	})
 }
 
-getSong(tweet)
+// Commenting this out for now while I set up the spotify calls/parsing
+//getSong(tweet)
