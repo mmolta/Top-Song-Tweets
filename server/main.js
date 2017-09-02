@@ -5,6 +5,7 @@ require('dotenv').config()
 
 const twit = require('twit')
 const request = require('request')
+// this is a PROMISE
 const spotify_calls = require('./spotify_api_calls')
 
 console.log('spotify api calls functions as it stands: ', spotify_calls)
