@@ -1,7 +1,6 @@
 'use strict'
 
 require('dotenv').config()
-const request = require('request')
 const spotifyWebApi = require('spotify-web-api-node')
 
 // instantiate the Spotify API
@@ -10,9 +9,9 @@ let spotifyApi = new spotifyWebApi({
 	clientSecret: process.env.SPOTIFY_CLIENT_SECRET
 })
 
-// dummy data for artist and country name for now
-var artistName = 'Daft+Punk'
-var countryName = 'US'
+// dummy data for artist and country name
+var artistName = 'Two+Door+Cinema+Club'
+var countryName = 'FR'
 
 // instantiate the API
 var topTrack = spotifyApi.clientCredentialsGrant()
@@ -22,6 +21,7 @@ var topTrack = spotifyApi.clientCredentialsGrant()
 		// Search an artist to get the artist ID
 		return spotifyApi.searchArtists(artistName)
 	}).then(foundArtist => {
+		
 		// isolate the artist ID from the response body 
 		let artistID = foundArtist.body.artists.items[0].id
 
@@ -29,12 +29,12 @@ var topTrack = spotifyApi.clientCredentialsGrant()
 		return spotifyApi.getArtistTopTracks(artistID, countryName)
 	}).then(topTracks => {
 
-		// isolate the top track in the given country from the response body
-		let topTrack = topTracks.body.tracks[0].name
+		// isolate & return the top track in the given country from the response body
+		return topTracks.body.tracks[0].name
 	}).catch(err => {
-		console.log('Something went wrong: ', err.message)
+		console.log('Error making the Spotify API calls: ', err.message)
 	})
 
 module.exports = {
-	Promise.resolve(topTrack)
+	topTrack
 }
