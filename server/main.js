@@ -13,10 +13,18 @@ let bot = new twit({
 	access_token_secret: process.env.TWITTER_TOKEN_SECRET
 })
 
+let requestInfo = bot.get('search/tweets', {q: '@top_song_tweets', count: 100}, (err, data, response) => {
+	// Extract the text of the tweet and remove the @top_song_tweets as well as trailing/leading spaces
+	return data.statuses[0].text.replace(/@top_song_tweets/g,'').trim().split('-')
+})
+
+module.exports = { requestInfo }
+
+
 // Carry out the tweet function once the imported spotify API promise is resolved
-spotify_calls.then(topTrack => {
+/*spotify_calls.then(topTrack => {
 	// For now, artist and country are dummy data consistent with spotify_api_calls.js
-	let artist = 'Two Door Cinema Club'
+	let artist = 'Anderson .Paak'
 	let country = 'FR'
 	let tweet = `The top song for ${artist} in ${country} is ${topTrack}`
 
@@ -26,4 +34,4 @@ spotify_calls.then(topTrack => {
 	})
 }).catch(err => {
 	console.log('Error while tweeting: ', err)
-})
+})*/
