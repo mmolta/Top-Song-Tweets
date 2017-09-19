@@ -1,37 +1,29 @@
 'use strict'
 
-// env process
-require('dotenv').config()
-
-const twit = require('twit')
 let spotify_calls = require('./spotify_api_calls').topTrack
+let twitter_calls = require('./twitter_get.js')
 
-let bot = new twit({
-	consumer_key: process.env.TWITTER_CONSUMER_KEY,
-	consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-	access_token: 	process.env.TWITTER_ACCESS_TOKEN,
-	access_token_secret: process.env.TWITTER_TOKEN_SECRET
-})
+let bot = twitter_calls.bot
 
-let requestInfo = bot.get('search/tweets', {q: '@top_song_tweets', count: 100}, (err, data, response) => {
-	// Extract the text of the tweet and remove the @top_song_tweets as well as trailing/leading spaces
-	return data.statuses[0].text.replace(/@top_song_tweets/g,'').trim().split('-')
-})
+let postTweet = () => {
 
-module.exports = { requestInfo }
+	// Carry out the tweet function once the imported spotify API promise is resolved
+	spotify_calls.then(artistInfo => {
 
+		console.log('artistInfo ', artistInfo)
+		//let tweet = `The top song for ${artistInfo[1]} in ${artistInfo[2]} is ${artistInfo[0]}`
 
-// Carry out the tweet function once the imported spotify API promise is resolved
-/*spotify_calls.then(topTrack => {
-	// For now, artist and country are dummy data consistent with spotify_api_calls.js
-	let artist = 'Anderson .Paak'
-	let country = 'FR'
-	let tweet = `The top song for ${artist} in ${country} is ${topTrack}`
+		//console.log('THE TWEET IN ALL ITS GLORY ', tweet)
+		//let bot = require('./twitter_get').bot
 
-	// successful tweet
-	bot.post('statuses/update', {status: tweet}, (err, data, response) => {
-		console.log('data from tweet function: ', data)
+		// successful tweet
+	/*	bot.post('statuses/update', {status: tweet}, (err, data, response) => {
+			console.log('data from tweet function: ', data)
+		}).catch(err => {
+			console.log('Error while tweeting: ', err)
+		})*/
 	})
-}).catch(err => {
-	console.log('Error while tweeting: ', err)
-})*/
+
+}
+
+postTweet()
