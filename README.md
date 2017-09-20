@@ -1,4 +1,4 @@
-# Top Songs Twitter Bot
+# Top Songs Twitter Bot (@top_song_tweets)
 
 This is a twitter bot that tweets an artists top song in a given country. Tweet the artist name and country - Spoon, FR - and the bot will respond with their top song in that country. 
 
