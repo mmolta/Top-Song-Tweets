@@ -14,8 +14,13 @@ let bot = new twit({
 let requestInfo = bot.get('search/tweets', {q: '@top_song_tweets', count: 100}, (err, data, response) => {
 	return data
 }).then(data => {
+	// Extract the handle of whoever asked for the top song
+	let handle = data.data.statuses[0].user.screen_name
+	
 	// Extract the text of the tweet and remove the @top_song_tweets and returns the desired info in an array
-	return data.data.statuses[0].text.replace(/@top_song_tweets/g,'').split('-')
+	let question = data.data.statuses[0].text.replace(/@top_song_tweets/g,'').split('-')
+	
+	return {question, handle}
 })
 
 module.exports = {requestInfo, bot}
